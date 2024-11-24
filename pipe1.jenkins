@@ -20,12 +20,12 @@ pipeline {
         stage("First step") {
             steps {
 // поскольку шелл и так в кавычках, дополнительные кавычки экранируются символом \
-                sh 'ssh max-lmde@192.168.1.116 \'hostname\''
+                sh 'ssh max-lmde@192.168.1.117 \'hostname\''
             }
         }
         stage("Second step") {
             steps {
-                sh 'ssh max-lmde@192.168.1.116 \'uptime\''
+                sh 'ssh max-lmde@192.168.1.117 \'uptime\''
             }
         }
     }
