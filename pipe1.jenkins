@@ -5,9 +5,9 @@ properties([disableConcurrentBuilds()])
 
 pipeline {
 // лейбл ноды дженкинса, где будет выполняться джоба
-    agent { 
-        label 'master'
-        }
+//    agent { 
+//        label 'master'
+//        }
 // опции выполнения джобы - плагин buildDiscarder настраивает хранение
 // логов и артефактов последних 10 сборок
     options {
