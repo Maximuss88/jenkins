@@ -1,0 +1,32 @@
+#!groovy
+
+// запрет одновременных сборок
+properties([disableConcurrentBuilds()])
+
+pipeline {
+// лейбл ноды дженкинса, где будет выполняться джоба
+    agent { 
+        label 'master'
+        }
+// опции выполнения джобы - плагин buildDiscarder настраивает хранение
+// логов и артефактов последних 10 сборок
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
+// параметр timestamps добавляет отметки времени в лог сборки
+        timestamps()
+    }
+// этапы выполнения - основа джобы
+    stages {
+        stage("First step") {
+            steps {
+// поскольку шелл и так в кавычках, дополнительные кавычки экранируются символом \
+                sh 'ssh max-lmde@192.168.1.116 \'hostname\''
+            }
+        }
+        stage("Second step") {
+            steps {
+                sh 'ssh max-lmde@192.168.1.116 \'uptime\''
+            }
+        }
+    }
+}
